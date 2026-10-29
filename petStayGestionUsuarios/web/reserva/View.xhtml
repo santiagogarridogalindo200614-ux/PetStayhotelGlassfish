@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewReservaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewReservaLabel_fechaIngreso}"/>
+                    <h:outputText value="#{reservaController.selected.fechaIngreso}" title="#{bundle.ViewReservaTitle_fechaIngreso}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Bogota"/>
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewReservaLabel_fechaSalida}"/>
+                    <h:outputText value="#{reservaController.selected.fechaSalida}" title="#{bundle.ViewReservaTitle_fechaSalida}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Bogota"/>
+                    </h:outputText>
+                    <h:outputText value="#{bundle.ViewReservaLabel_estado}"/>
+                    <h:outputText value="#{reservaController.selected.estado}" title="#{bundle.ViewReservaTitle_estado}"/>
+                    <h:outputText value="#{bundle.ViewReservaLabel_total}"/>
+                    <h:outputText value="#{reservaController.selected.total}" title="#{bundle.ViewReservaTitle_total}"/>
+                    <h:outputText value="#{bundle.ViewReservaLabel_idHabitacion}"/>
+                    <h:outputText value="#{reservaController.selected.idHabitacion}" title="#{bundle.ViewReservaTitle_idHabitacion}"/>
+                    <h:outputText value="#{bundle.ViewReservaLabel_idMascota}"/>
+                    <h:outputText value="#{reservaController.selected.idMascota}" title="#{bundle.ViewReservaTitle_idMascota}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{reservaController.destroyAndView}" value="#{bundle.ViewReservaDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewReservaEditLink}"/>
+                <br />
+                <h:commandLink action="#{reservaController.prepareCreate}" value="#{bundle.ViewReservaCreateLink}" />
+                <br />
+                <h:commandLink action="#{reservaController.prepareList}" value="#{bundle.ViewReservaShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewReservaIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

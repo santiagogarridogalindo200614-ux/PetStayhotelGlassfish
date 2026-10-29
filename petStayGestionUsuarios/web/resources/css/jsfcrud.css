@@ -1,0 +1,146 @@
+root { 
+    display: block;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #3a4f54;
+    background-color: #dfecf1;
+    font-size: small;
+}
+
+a {
+    color: #e33b06;
+}
+
+table {
+    empty-cells: show;
+}
+
+form.jsfcrud_list_form th, td th {
+    font-size: x-small;
+    color: #4e6a71;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-color: #b2d5d6;
+    border-bottom-color: #b2d5d6;
+    border-left-color: #90b4bd;
+    border-right-color: #90b4bd;
+    letter-spacing: 3px;
+    text-align: left;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: #b2d5d6;
+}
+
+td {
+    vertical-align: top;
+    padding-bottom: 8px;
+    font-size: small;
+}
+
+form.jsfcrud_list_form td, td td {
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-top-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-color: #b2d5d6;
+    border-bottom-color: #b2d5d6;
+    border-left-color: #b2d5d6;
+    border-right-color: #b2d5d6;
+    vertical-align: baseline;
+    padding-bottom: 0px;
+}
+
+tr.jsfcrud_odd_row {
+    background-color: #fefeff;
+    color: #4e6a71;
+}
+
+
+tr.jsfcrud_even_row {
+    background-color: #eff5fa;
+    color: #4e6a71;
+}
+
+#busyImage {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+/* ENCABEZADO: franja azul de 900px de ancho */
+#encabezado {
+    width: 900px;
+    height: 100px;
+    background-color: #0b5394;
+    border: #d3d3d3 1px solid;
+}
+
+/* Titulo centrado, blanco y alineado verticalmente con line-height */
+#encabezado h1 {
+    text-align: center;
+    color: white;
+    margin: 0;
+    line-height: 100px;
+}
+
+/* MENU: columna a la izquierda (float: left) */
+#menu {
+    float: left;
+    width: 160px;
+    margin-top: 20px;
+}
+
+/* Quita las vinetas y el espacio por defecto de la lista */
+#menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Separacion entre botones */
+#menu li {
+    margin-bottom: 8px;
+}
+
+/* Cada enlace se ve como un boton azul */
+#menu a {
+    display: block;
+    background-color: #0075ff;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px;
+    border: #d3d3d3 2px solid;
+}
+
+/* Color mas oscuro al pasar el mouse */
+#menu a:hover {
+    background-color: #0b5394;
+}
+
+/* CONTENIDO: se deja un margen izquierdo de 190px para no quedar debajo del menu */
+#contenido {
+    border: #d3d3d3 1px solid;
+    margin: 20px 20px 10px 190px;
+    padding: 10px 15px;
+    width: 690px;
+}
+
+/* Titulo de cada pagina, azul y con linea inferior */
+#contenido h2 {
+    color: #0075ff;
+    border-bottom: #cfbfb5 1px solid;
+}

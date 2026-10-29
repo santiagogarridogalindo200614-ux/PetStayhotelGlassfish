@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateMascotaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <!-- CUADRICULA DEL FORMULARIO: 2 columnas (etiqueta a la izquierda, campo a la derecha).
+                     Cada par outputLabel + inputText ocupa una fila.
+                     No hay campo Id porque la base de datos lo genera sola (autoincremental). -->
+                <h:panelGrid columns="2">
+
+                    <ui:remove><!-- NOMBRE: obligatorio. Si se deja vacio sale el mensaje del Bundle. --></ui:remove>
+                    <h:outputLabel value="#{bundle.CreateMascotaLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{mascotaController.selected.nombre}" title="#{bundle.CreateMascotaTitle_nombre}"
+                                 required="true" requiredMessage="#{bundle.CreateMascotaRequiredMessage_nombre}" />
+
+                    <ui:remove><!-- ESPECIE: obligatoria, igual que el nombre. --></ui:remove>
+                    <h:outputLabel value="#{bundle.CreateMascotaLabel_especie}" for="especie" />
+                    <h:inputText id="especie" value="#{mascotaController.selected.especie}" title="#{bundle.CreateMascotaTitle_especie}"
+                                 required="true" requiredMessage="#{bundle.CreateMascotaRequiredMessage_especie}" />
+
+                    <ui:remove><!-- RAZA: opcional, sin validaciones. --></ui:remove>
+                    <h:outputLabel value="#{bundle.CreateMascotaLabel_raza}" for="raza" />
+                    <h:inputText id="raza" value="#{mascotaController.selected.raza}" title="#{bundle.CreateMascotaTitle_raza}" />
+
+                    <ui:remove><!-- EDAD: opcional, pero si se escribe debe ser un entero entre 0 y 40.
+                         converterMessage = mensaje si no es un numero (ej: "abc").
+                         validatorMessage = mensaje si esta fuera del rango del f:validateLongRange. --></ui:remove>
+                    <h:outputLabel value="#{bundle.CreateMascotaLabel_edad}" for="edad" />
+                    <h:inputText id="edad" value="#{mascotaController.selected.edad}" title="#{bundle.CreateMascotaTitle_edad}"
+                                 converterMessage="#{bundle.CreateMascotaConverterMessage_edad}"
+                                 validatorMessage="#{bundle.CreateMascotaValidatorMessage_edad}">
+                        <f:validateLongRange minimum="0" maximum="40"/>
+                    </h:inputText>
+
+                    <ui:remove><!-- PESO: opcional, decimal entre 0.1 y 150 kg (f:validateDoubleRange acepta decimales). --></ui:remove>
+                    <h:outputLabel value="#{bundle.CreateMascotaLabel_peso}" for="peso" />
+                    <h:inputText id="peso" value="#{mascotaController.selected.peso}" title="#{bundle.CreateMascotaTitle_peso}"
+                                 converterMessage="#{bundle.CreateMascotaConverterMessage_peso}"
+                                 validatorMessage="#{bundle.CreateMascotaValidatorMessage_peso}">
+                        <f:validateDoubleRange minimum="0.1" maximum="150"/>
+                    </h:inputText>
+
+                    <ui:remove><!-- OBSERVACIONES: texto libre y opcional. --></ui:remove>
+                    <h:outputLabel value="#{bundle.CreateMascotaLabel_observaciones}" for="observaciones" />
+                    <h:inputText id="observaciones" value="#{mascotaController.selected.observaciones}" title="#{bundle.CreateMascotaTitle_observaciones}" />
+
+                    <ui:remove><!-- PROPIETARIO: menu desplegable con los usuarios registrados.
+                         Los nombres que se ven salen del toString() de Usuario.java.
+                         Es obligatorio porque toda mascota debe pertenecer a un cliente. --></ui:remove>
+                    <h:outputLabel value="#{bundle.CreateMascotaLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{mascotaController.selected.idUsuario}" title="#{bundle.CreateMascotaTitle_idUsuario}" required="true" requiredMessage="#{bundle.CreateMascotaRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+
+                <!-- BOTON GUARDAR: llama a create() del controlador, que valida y guarda la mascota. -->
+                <h:commandLink action="#{mascotaController.create}" value="#{bundle.CreateMascotaSaveLink}" />
+                <br />
+                <br />
+
+                <!-- FLUJO ALTERNATIVO CU2: si el cliente no existe, se va a registrarlo primero.
+                     h:link navega directo a /usuario/Create (ruta sin la extension .xhtml). -->
+                <h:link outcome="/usuario/Create" value="#{bundle.CreateMascotaNewClientLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

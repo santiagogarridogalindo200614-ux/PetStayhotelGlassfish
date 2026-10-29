@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateHabitacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+<h:panelGrid columns="2">
+    <!-- NUMERO: obligatorio -->
+    <h:outputLabel value="#{bundle.CreateHabitacionLabel_numero}" for="numero" />
+    <h:inputText id="numero" value="#{habitacionController.selected.numero}" title="#{bundle.CreateHabitacionTitle_numero}"
+                 required="true" requiredMessage="#{bundle.CreateHabitacionRequiredMessage_numero}" />
+
+    <!-- TIPO: obligatorio (sencilla, doble, suite...) -->
+    <h:outputLabel value="#{bundle.CreateHabitacionLabel_tipo}" for="tipo" />
+    <h:inputText id="tipo" value="#{habitacionController.selected.tipo}" title="#{bundle.CreateHabitacionTitle_tipo}"
+                 required="true" requiredMessage="#{bundle.CreateHabitacionRequiredMessage_tipo}" />
+
+    <!-- CAPACIDAD: entero obligatorio; converterMessage sale si escriben letras -->
+    <h:outputLabel value="#{bundle.CreateHabitacionLabel_capacidad}" for="capacidad" />
+    <h:inputText id="capacidad" value="#{habitacionController.selected.capacidad}" title="#{bundle.CreateHabitacionTitle_capacidad}"
+                 required="true" requiredMessage="#{bundle.CreateHabitacionRequiredMessage_capacidad}"
+                 converterMessage="#{bundle.CreateHabitacionConverterMessage_capacidad}" />
+
+    <!-- PRECIO POR NOCHE: se usa para calcular el total de la reserva -->
+    <h:outputLabel value="#{bundle.CreateHabitacionLabel_precioNoche}" for="precioNoche" />
+    <h:inputText id="precioNoche" value="#{habitacionController.selected.precioNoche}" title="#{bundle.CreateHabitacionTitle_precioNoche}"
+                 required="true" requiredMessage="#{bundle.CreateHabitacionRequiredMessage_precioNoche}"
+                 converterMessage="#{bundle.CreateHabitacionConverterMessage_precioNoche}" />
+
+    <!-- ESTADO: menu desplegable en vez de texto libre -->
+    <h:outputLabel value="#{bundle.CreateHabitacionLabel_estado}" for="estado" />
+    <h:selectOneMenu id="estado" value="#{habitacionController.selected.estado}">
+        <f:selectItem itemValue="Disponible" itemLabel="Disponible"/>
+        <f:selectItem itemValue="Mantenimiento" itemLabel="Mantenimiento"/>
+    </h:selectOneMenu>
+</h:panelGrid>
+                <br />
+                <h:commandLink action="#{habitacionController.create}" value="#{bundle.CreateHabitacionSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{habitacionController.prepareList}" value="#{bundle.CreateHabitacionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateHabitacionIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

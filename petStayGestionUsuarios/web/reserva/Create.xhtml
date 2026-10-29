@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateReservaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+<h:panelGrid columns="2">
+    <!-- CLIENTE: no es campo de Reserva, solo filtra el selector de mascotas.
+         f:ajax vuelve a dibujar el menu "idMascota" cada vez que se cambia de cliente. -->
+    <h:outputLabel value="#{bundle.CreateReservaLabel_usuario}" for="usuario" />
+    <h:selectOneMenu id="usuario" value="#{reservaController.usuarioSeleccionado}" title="#{bundle.CreateReservaTitle_usuario}"
+                     required="true" requiredMessage="#{bundle.CreateReservaRequiredMessage_usuario}">
+        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+        <f:ajax render="idMascota"/>
+    </h:selectOneMenu>
+
+    <!-- MASCOTA: solo las mascotas del cliente elegido -->
+    <h:outputLabel value="#{bundle.CreateReservaLabel_idMascota}" for="idMascota" />
+    <h:selectOneMenu id="idMascota" value="#{reservaController.selected.idMascota}" title="#{bundle.CreateReservaTitle_idMascota}"
+                     required="true" requiredMessage="#{bundle.CreateReservaRequiredMessage_idMascota}">
+        <f:selectItems value="#{reservaController.mascotasDelUsuario}"/>
+    </h:selectOneMenu>
+
+    <!-- HABITACION -->
+    <h:outputLabel value="#{bundle.CreateReservaLabel_idHabitacion}" for="idHabitacion" />
+    <h:selectOneMenu id="idHabitacion" value="#{reservaController.selected.idHabitacion}" title="#{bundle.CreateReservaTitle_idHabitacion}"
+                     required="true" requiredMessage="#{bundle.CreateReservaRequiredMessage_idHabitacion}">
+        <f:selectItems value="#{habitacionController.itemsAvailableSelectOne}"/>
+    </h:selectOneMenu>
+
+    <!-- FECHA DE INGRESO: formato dd/MM/yyyy.
+         timeZone evita que la fecha se guarde un dia antes (JSF usa GMT por defecto). -->
+    <h:outputLabel value="#{bundle.CreateReservaLabel_fechaIngreso}" for="fechaIngreso" />
+    <h:inputText id="fechaIngreso" value="#{reservaController.selected.fechaIngreso}" title="#{bundle.CreateReservaTitle_fechaIngreso}"
+                 required="true" requiredMessage="#{bundle.CreateReservaRequiredMessage_fechaIngreso}"
+                 converterMessage="#{bundle.CreateReservaConverterMessage_fechaIngreso}">
+        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Bogota"/>
+    </h:inputText>
+
+    <!-- FECHA DE SALIDA: igual que la de ingreso -->
+    <h:outputLabel value="#{bundle.CreateReservaLabel_fechaSalida}" for="fechaSalida" />
+    <h:inputText id="fechaSalida" value="#{reservaController.selected.fechaSalida}" title="#{bundle.CreateReservaTitle_fechaSalida}"
+                 required="true" requiredMessage="#{bundle.CreateReservaRequiredMessage_fechaSalida}"
+                 converterMessage="#{bundle.CreateReservaConverterMessage_fechaSalida}">
+        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Bogota"/>
+    </h:inputText>
+</h:panelGrid>
+                <br />
+                <h:commandLink action="#{reservaController.create}" value="#{bundle.CreateReservaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{reservaController.prepareList}" value="#{bundle.CreateReservaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateReservaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

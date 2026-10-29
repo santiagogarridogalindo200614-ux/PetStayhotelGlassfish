@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditReservaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditReservaLabel_fechaIngreso}" for="fechaIngreso" />
+                    <h:inputText id="fechaIngreso" value="#{reservaController.selected.fechaIngreso}" title="#{bundle.EditReservaTitle_fechaIngreso}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Bogota"/>
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditReservaLabel_fechaSalida}" for="fechaSalida" />
+                    <h:inputText id="fechaSalida" value="#{reservaController.selected.fechaSalida}" title="#{bundle.EditReservaTitle_fechaSalida}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Bogota"/>
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditReservaLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{reservaController.selected.estado}" title="#{bundle.EditReservaTitle_estado}" />
+                    <h:outputLabel value="#{bundle.EditReservaLabel_total}" for="total" />
+                    <h:inputText id="total" value="#{reservaController.selected.total}" title="#{bundle.EditReservaTitle_total}" />
+                    <h:outputLabel value="#{bundle.EditReservaLabel_idHabitacion}" for="idHabitacion" />
+                    <h:selectOneMenu id="idHabitacion" value="#{reservaController.selected.idHabitacion}" title="#{bundle.EditReservaTitle_idHabitacion}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_idHabitacion}">
+                        <f:selectItems value="#{habitacionController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditReservaLabel_idMascota}" for="idMascota" />
+                    <h:selectOneMenu id="idMascota" value="#{reservaController.selected.idMascota}" title="#{bundle.EditReservaTitle_idMascota}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_idMascota}">
+                        <f:selectItems value="#{mascotaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{reservaController.update}" value="#{bundle.EditReservaSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditReservaViewLink}"/>
+                <br />
+                <h:commandLink action="#{reservaController.prepareList}" value="#{bundle.EditReservaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditReservaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

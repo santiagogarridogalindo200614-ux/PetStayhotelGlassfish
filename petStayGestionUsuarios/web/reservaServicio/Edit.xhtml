@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditReservaServicioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditReservaServicioLabel_cantidad}" for="cantidad" />
+                    <h:inputText id="cantidad" value="#{reservaServicioController.selected.cantidad}" title="#{bundle.EditReservaServicioTitle_cantidad}" />
+                    <h:outputLabel value="#{bundle.EditReservaServicioLabel_precioUnitario}" for="precioUnitario" />
+                    <h:inputText id="precioUnitario" value="#{reservaServicioController.selected.precioUnitario}" title="#{bundle.EditReservaServicioTitle_precioUnitario}" />
+                    <h:outputLabel value="#{bundle.EditReservaServicioLabel_subtotal}" for="subtotal" />
+                    <h:inputText id="subtotal" value="#{reservaServicioController.selected.subtotal}" title="#{bundle.EditReservaServicioTitle_subtotal}" />
+                    <h:outputLabel value="#{bundle.EditReservaServicioLabel_idReserva}" for="idReserva" />
+                    <h:selectOneMenu id="idReserva" value="#{reservaServicioController.selected.idReserva}" title="#{bundle.EditReservaServicioTitle_idReserva}" required="true" requiredMessage="#{bundle.EditReservaServicioRequiredMessage_idReserva}">
+                        <f:selectItems value="#{reservaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditReservaServicioLabel_idServicio}" for="idServicio" />
+                    <h:selectOneMenu id="idServicio" value="#{reservaServicioController.selected.idServicio}" title="#{bundle.EditReservaServicioTitle_idServicio}" required="true" requiredMessage="#{bundle.EditReservaServicioRequiredMessage_idServicio}">
+                        <f:selectItems value="#{servicioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{reservaServicioController.update}" value="#{bundle.EditReservaServicioSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditReservaServicioViewLink}"/>
+                <br />
+                <h:commandLink action="#{reservaServicioController.prepareList}" value="#{bundle.EditReservaServicioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditReservaServicioIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

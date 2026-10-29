@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMascotaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <!-- CUADRICULA DEL FORMULARIO DE EDICION: mismas 2 columnas que en Create. -->
+                <h:panelGrid columns="2">
+
+                    <ui:remove><!-- ID: solo se muestra como texto. No es editable para evitar cambiarlo por error. --></ui:remove>
+                    <h:outputLabel value="#{bundle.EditMascotaLabel_idMascota}" />
+                    <h:outputText value="#{mascotaController.selected.idMascota}" />
+
+                    <ui:remove><!-- NOMBRE y ESPECIE: obligatorios. --></ui:remove>
+                    <h:outputLabel value="#{bundle.EditMascotaLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{mascotaController.selected.nombre}" title="#{bundle.EditMascotaTitle_nombre}"
+                                 required="true" requiredMessage="#{bundle.EditMascotaRequiredMessage_nombre}" />
+                    <h:outputLabel value="#{bundle.EditMascotaLabel_especie}" for="especie" />
+                    <h:inputText id="especie" value="#{mascotaController.selected.especie}" title="#{bundle.EditMascotaTitle_especie}"
+                                 required="true" requiredMessage="#{bundle.EditMascotaRequiredMessage_especie}" />
+
+                    <ui:remove><!-- RAZA: opcional. --></ui:remove>
+                    <h:outputLabel value="#{bundle.EditMascotaLabel_raza}" for="raza" />
+                    <h:inputText id="raza" value="#{mascotaController.selected.raza}" title="#{bundle.EditMascotaTitle_raza}" />
+
+                    <ui:remove><!-- EDAD: entero entre 0 y 40 (converterMessage = no es numero, validatorMessage = fuera de rango). --></ui:remove>
+                    <h:outputLabel value="#{bundle.EditMascotaLabel_edad}" for="edad" />
+                    <h:inputText id="edad" value="#{mascotaController.selected.edad}" title="#{bundle.EditMascotaTitle_edad}"
+                                 converterMessage="#{bundle.EditMascotaConverterMessage_edad}"
+                                 validatorMessage="#{bundle.EditMascotaValidatorMessage_edad}">
+                        <f:validateLongRange minimum="0" maximum="40"/>
+                    </h:inputText>
+
+                    <ui:remove><!-- PESO: decimal entre 0.1 y 150 kg. --></ui:remove>
+                    <h:outputLabel value="#{bundle.EditMascotaLabel_peso}" for="peso" />
+                    <h:inputText id="peso" value="#{mascotaController.selected.peso}" title="#{bundle.EditMascotaTitle_peso}"
+                                 converterMessage="#{bundle.EditMascotaConverterMessage_peso}"
+                                 validatorMessage="#{bundle.EditMascotaValidatorMessage_peso}">
+                        <f:validateDoubleRange minimum="0.1" maximum="150"/>
+                    </h:inputText>
+
+                    <ui:remove><!-- OBSERVACIONES: opcional. --></ui:remove>
+                    <h:outputLabel value="#{bundle.EditMascotaLabel_observaciones}" for="observaciones" />
+                    <h:inputText id="observaciones" value="#{mascotaController.selected.observaciones}" title="#{bundle.EditMascotaTitle_observaciones}" />
+
+                    <ui:remove><!-- PROPIETARIO: menu desplegable, obligatorio. Muestra el toString() de Usuario. --></ui:remove>
+                    <h:outputLabel value="#{bundle.EditMascotaLabel_idUsuario}" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{mascotaController.selected.idUsuario}" title="#{bundle.EditMascotaTitle_idUsuario}" required="true" requiredMessage="#{bundle.EditMascotaRequiredMessage_idUsuario}">
+                        <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+
+                <!-- BOTON GUARDAR: llama a update() del controlador para guardar los cambios. -->
+                <h:commandLink action="#{mascotaController.update}" value="#{bundle.EditMascotaSaveLink}"/>
+                <br />
+                <br />
+
+                <!-- ENLACE A LA VISTA DE DETALLE (View.xhtml, misma carpeta). -->
+                <h:link outcome="View" value="#{bundle.EditMascotaViewLink}"/>
+                <h:link outcome="/index" value="#{bundle.EditMascotaIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

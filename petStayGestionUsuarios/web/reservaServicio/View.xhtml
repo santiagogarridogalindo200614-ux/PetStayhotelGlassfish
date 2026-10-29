@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewReservaServicioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewReservaServicioLabel_cantidad}"/>
+                    <h:outputText value="#{reservaServicioController.selected.cantidad}" title="#{bundle.ViewReservaServicioTitle_cantidad}"/>
+                    <h:outputText value="#{bundle.ViewReservaServicioLabel_precioUnitario}"/>
+                    <h:outputText value="#{reservaServicioController.selected.precioUnitario}" title="#{bundle.ViewReservaServicioTitle_precioUnitario}"/>
+                    <h:outputText value="#{bundle.ViewReservaServicioLabel_subtotal}"/>
+                    <h:outputText value="#{reservaServicioController.selected.subtotal}" title="#{bundle.ViewReservaServicioTitle_subtotal}"/>
+                    <h:outputText value="#{bundle.ViewReservaServicioLabel_idReserva}"/>
+                    <h:outputText value="#{reservaServicioController.selected.idReserva}" title="#{bundle.ViewReservaServicioTitle_idReserva}"/>
+                    <h:outputText value="#{bundle.ViewReservaServicioLabel_idServicio}"/>
+                    <h:outputText value="#{reservaServicioController.selected.idServicio}" title="#{bundle.ViewReservaServicioTitle_idServicio}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{reservaServicioController.destroyAndView}" value="#{bundle.ViewReservaServicioDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewReservaServicioEditLink}"/>
+                <br />
+                <h:commandLink action="#{reservaServicioController.prepareCreate}" value="#{bundle.ViewReservaServicioCreateLink}" />
+                <br />
+                <h:commandLink action="#{reservaServicioController.prepareList}" value="#{bundle.ViewReservaServicioShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewReservaServicioIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

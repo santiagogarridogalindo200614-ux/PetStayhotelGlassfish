@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditUsuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.EditUsuarioLabel_idUsuario}"/>
+                    <h:outputText id="idUsuario" value="#{usuarioController.selected.idUsuario}"/>
+<h:outputLabel value="#{bundle.EditUsuarioLabel_nombre}" for="nombre" />
+<h:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.EditUsuarioTitle_nombre}"
+             required="true" requiredMessage="El nombre es obligatorio" />
+<h:outputLabel value="#{bundle.EditUsuarioLabel_apellido}" for="apellido" />
+<h:inputText id="apellido" value="#{usuarioController.selected.apellido}" title="#{bundle.EditUsuarioTitle_apellido}"
+             required="true" requiredMessage="El apellido es obligatorio" />
+<h:outputLabel value="#{bundle.EditUsuarioLabel_cedula}" for="cedula" />
+<h:inputText id="cedula" value="#{usuarioController.selected.cedula}" title="#{bundle.EditUsuarioTitle_cedula}"
+             required="true" requiredMessage="La cédula es obligatoria"
+             validatorMessage="La cédula debe tener entre 6 y 10 números">
+    <f:validateRegex pattern="[0-9]{6,10}"/>
+</h:inputText>
+<h:outputLabel value="#{bundle.EditUsuarioLabel_telefono}" for="telefono" />
+<h:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundle.EditUsuarioTitle_telefono}"
+             required="true" requiredMessage="El teléfono es obligatorio" />
+<h:outputLabel value="#{bundle.EditUsuarioLabel_correo}" for="correo" />
+<h:inputText id="correo" value="#{usuarioController.selected.correo}" title="#{bundle.EditUsuarioTitle_correo}"
+             required="true" requiredMessage="El correo es obligatorio" />
+<h:outputLabel value="#{bundle.EditUsuarioLabel_direccion}" for="direccion" />
+<h:inputText id="direccion" value="#{usuarioController.selected.direccion}" title="#{bundle.EditUsuarioTitle_direccion}" />
+                </h:panelGrid>
+                <h:commandLink action="#{usuarioController.update}" value="#{bundle.EditUsuarioSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditUsuarioViewLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

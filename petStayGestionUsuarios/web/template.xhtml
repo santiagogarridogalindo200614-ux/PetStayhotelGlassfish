@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- Titulo de la pestana del navegador; cada pagina puede cambiarlo -->
+        <title><ui:insert name="title">PetStay Hotel</ui:insert></title>
+        <!-- Carga la hoja de estilos resources/css/jsfcrud.css -->
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+    </h:head>
+
+    <h:body>
+        <!-- ENCABEZADO: franja azul superior con el nombre del sistema -->
+        <div id="encabezado">
+            <h1><ui:insert name="header">PetStay Hotel</ui:insert></h1>
+        </div>
+
+        <!-- MENU: botones laterales. h:link lleva a otra pagina sin configurar rutas -->
+        <nav id="menu">
+            <ul>
+                <!-- outcome es la ruta de la pagina, sin la extension .xhtml -->
+                <li><h:link outcome="/index" value="Inicio"/></li>
+                <li><h:link outcome="/usuario/Create" value="Registrar Usuario"/></li>
+                <li><h:link outcome="/usuario/List" value="Consultar Usuarios"/></li>
+                                <!-- Opciones del menu para Mascota (outcome = ruta de la pagina sin .xhtml) -->
+                <li><h:link outcome="/mascota/Create" value="Registrar Mascota"/></li>
+                <li><h:link outcome="/mascota/List" value="Consultar Mascotas"/></li>
+                                <!-- CU3: reservas -->
+                <li><h:link outcome="/reserva/Create" value="Reservar Estadía"/></li>
+                <li><h:link outcome="/reserva/List" value="Consultar Reservas"/></li>
+                <!-- Catalogos -->
+                <li><h:link outcome="/habitacion/Create" value="Registrar Habitación"/></li>
+                <li><h:link outcome="/habitacion/List" value="Consultar Habitaciones"/></li>
+                <li><h:link outcome="/servicio/Create" value="Registrar Servicio"/></li>
+                <li><h:link outcome="/servicio/List" value="Consultar Servicios"/></li>
+                <!-- Servicios adicionales de una reserva -->
+                <li><h:link outcome="/reservaServicio/Create" value="Servicios de una Reserva"/></li>
+            </ul>
+        </nav>
+
+        <!-- CONTENIDO: aqui cada pagina inserta su titulo y su cuerpo -->
+        <div id="contenido">
+            <!-- Se llena con ui:define name="title" de cada pagina -->
+            <h2><ui:insert name="title">Titulo</ui:insert></h2>
+            <!-- Se llena con ui:define name="body" de cada pagina -->
+            <ui:insert name="body">Contenido</ui:insert>
+        </div>
+    </h:body>
+</html>
